@@ -1,0 +1,13 @@
+{
+  "groups": [
+    {
+      "name": "based",
+      "channels": [
+        "1chan",
+        "2chan",
+        "3chan",
+        "4chan"
+      ]
+    }
+  ]
+}
