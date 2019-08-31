@@ -42,7 +42,7 @@ module.exports = (req, res) => {
   customer.upwd = req.body.upwd;
   customer.valid = false;
 
-  console.log(typeof (users), users);
+  // console.log(typeof (users), users);
 
   users.forEach(user => {
     if (req.body.email === user.email && req.body.upwd === user.upwd) {
