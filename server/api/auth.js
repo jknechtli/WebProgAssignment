@@ -29,7 +29,7 @@
 //   },
 // ];
 
-const users = require('./storage/users.json');
+const users = require('./../storage/users.json');
 
 module.exports = (req, res) => {
 
