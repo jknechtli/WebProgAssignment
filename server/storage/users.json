@@ -1,55 +1,53 @@
-{
-  "users": [
-    {
-      "username": "joel",
-      "birthday": "15/09/1998",
-      "age": "20",
-      "email": "abc@com.au",
-      "password": "123",
-      "valid": null,
-      "role": 15,
-      "groups": [
-        {
-          "name": "based",
-          "channels": [
-            "1chan"
-          ]
-        }
-      ]
-    },
-    {
-      "username": "dave",
-      "birthday": "15/09/1987",
-      "age": "31",
-      "email": "dave@com.au",
-      "password": "farrow",
-      "valid": null,
-      "role": 10,
-      "groups": [
-        {
-          "name": "based",
-          "channels": [
-            "2chan"
-          ]
-        }
-      ]
-    },
-    {
-      "username": "nish",
-      "birthday": "15/09/1993",
-      "age": "25",
-      "email": "nish@com.au",
-      "password": "ant",
-      "valid": null,
-      "role": 5,
-      "groups": [
-        {
-          "name": "based",
-          "channels": [
-            "3chan"
-          ]
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "username": "joel",
+    "birthday": "15/09/1998",
+    "age": "20",
+    "email": "abc@com.au",
+    "password": "123",
+    "valid": null,
+    "role": 15,
+    "groups": [
+      {
+        "name": "based",
+        "channels": [
+          "1chan"
+        ]
+      }
+    ]
+  },
+  {
+    "username": "dave",
+    "birthday": "15/09/1987",
+    "age": "31",
+    "email": "dave@com.au",
+    "password": "farrow",
+    "valid": null,
+    "role": 10,
+    "groups": [
+      {
+        "name": "based",
+        "channels": [
+          "2chan"
+        ]
+      }
+    ]
+  },
+  {
+    "username": "nish",
+    "birthday": "15/09/1993",
+    "age": "25",
+    "email": "nish@com.au",
+    "password": "ant",
+    "valid": null,
+    "role": 5,
+    "groups": [
+      {
+        "name": "based",
+        "channels": [
+          "3chan"
+        ]
+      }
+    ]
+  }
+]
