@@ -1,0 +1,8 @@
+ul {
+  flex-direction: row;
+  margin-bottom: 2rem;
+}
+
+li a {
+  padding: 16px;
+}

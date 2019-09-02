@@ -9,6 +9,10 @@ import { DataService } from './services/data.service';
 import { AccountComponent } from './account/account.component';
 import { GroupsComponent } from './groups/groups.component';
 import { UsersComponent } from './users/users.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
+import { ChatRoomComponent } from './chat-room/chat-room.component';
+import { ChatHubComponent } from './chat-hub/chat-hub.component';
+import { ChatGroupComponent } from './chat-group/chat-group.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +21,10 @@ import { UsersComponent } from './users/users.component';
     AccountComponent,
     GroupsComponent,
     UsersComponent,
+    UserEditComponent,
+    ChatRoomComponent,
+    ChatHubComponent,
+    ChatGroupComponent,
     // DataService
   ],
   imports: [
