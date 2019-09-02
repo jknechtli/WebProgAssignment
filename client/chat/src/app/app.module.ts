@@ -15,6 +15,7 @@ import { ChatHubComponent } from './chat-hub/chat-hub.component';
 import { ChatGroupComponent } from './chat-group/chat-group.component';
 import { UserCreateComponent } from './user-create/user-create.component';
 import { LogoutComponent } from './logout/logout.component';
+import { UserManageComponent } from './user-manage/user-manage.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { LogoutComponent } from './logout/logout.component';
     ChatGroupComponent,
     UserCreateComponent,
     LogoutComponent,
+    UserManageComponent,
     // DataService
   ],
   imports: [
