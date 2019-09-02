@@ -7,20 +7,35 @@ module.exports = (req, res) => {
     return res.sendStatus(400);
   }
 
-  const email = req.body.email;
+  const username = req.body.username;
   // customer.upwd = req.body.upwd;
   // customer.valid = false;
 
   // console.log(users);
 
+  let found = false;
+
   users.forEach(user => {
-    if (email === user.email) {
+    if (username === user.username) {
+      found = true;
       user.age = req.body.age;
-      user.username = req.body.username;
+      user.email = req.body.email;
       user.birthday = req.body.birthday;
       user.groups = req.body.groups;
     }
   });
+
+  if (!found) {
+    users.push(
+      {
+        username: req.body.username,
+        email: req.body.email,
+        role: req.body.role,
+        groups: req.body.groups,
+        birthday: req.body.birthday,
+      }
+    )
+  }
 
   const jsonString = JSON.stringify(users);
 
