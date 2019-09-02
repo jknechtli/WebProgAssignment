@@ -1,4 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { IUser } from '../login/login.component';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
+const url: string = "http://localhost:3000/api";
 
 @Component({
   selector: 'app-chat-group',
@@ -6,10 +15,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chat-group.component.css']
 })
 export class ChatGroupComponent implements OnInit {
+  private channels: string[];
+  private params;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(
+    private route: ActivatedRoute,
+    private httpClient: HttpClient) {
+    this.route.params.subscribe(params => console.log((this.params = params)));
   }
 
+  ngOnInit() {
+    const username = sessionStorage.getItem('username');
+    const role = sessionStorage.getItem('userRole');
+
+    this.httpClient.get<IUser>(url + `/user/${username}`, httpOptions)
+      .subscribe((data) => {
+        if (data) {
+          console.log("data: ", data);
+          const groups = data.groups;
+
+          this.channels = groups.filter(g => g.name === this.params.group)[0].channels;
+        }
+      });
+  }
 }
+
+

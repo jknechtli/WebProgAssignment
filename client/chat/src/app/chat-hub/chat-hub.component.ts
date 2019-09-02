@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { IGroup } from '../login/login.component';
+import { IGroup, IUser } from '../login/login.component';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,14 +19,15 @@ export class ChatHubComponent implements OnInit {
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
+    const username = sessionStorage.getItem('username');
+    const role = sessionStorage.getItem('userRole');
 
-    this.httpClient.get<IGroup[]>(url + '/groups', httpOptions)
+    this.httpClient.get<IUser>(url + `/user/${username}`, httpOptions)
       .subscribe((data) => {
         if (data) {
           console.log("data: ", data);
-          this.groups = data;
+          this.groups = data.groups;
         }
       });
   }
-
 }

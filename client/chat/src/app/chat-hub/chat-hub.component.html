@@ -1,1 +1,14 @@
-<p>chat-hub works!</p>
+<ul>
+  <li *ngFor="let group of groups">
+    <span>Group: </span>
+    <a routerLink="/chat/{{group.name}}" class=" nav-link">
+      <label>{{group.name}}</label>
+    </a>
+    <span style="display:block">Channels: </span>
+    <ul>
+      <li *ngFor="let channel of group.channels">
+        <a routerLink="/chat/{{group.name}}/{{channel}}" class="nav-link">{{channel}}</a>
+      </li>
+    </ul>
+  </li>
+</ul>

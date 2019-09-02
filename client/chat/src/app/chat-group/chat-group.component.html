@@ -1,1 +1,7 @@
-<p>chat-group works!</p>
+<label>channels of group {{params.group}}:</label>
+<div *ngFor="let channel of channels">
+  <a routerLink="/chat/{{params.group}}/{{channel}}" class="nav-link">
+    <h4>{{channel}}</h4>
+  </a>
+  <!-- <p class="card-text">{{group.punchline}}</p> -->
+</div>
