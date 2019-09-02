@@ -52,6 +52,7 @@ module.exports = (req, res) => {
       customer.birthday = user.birthday;
       customer.email = user.email;
       customer.password = '';
+      customer.role = user.role;
     }
   });
 
