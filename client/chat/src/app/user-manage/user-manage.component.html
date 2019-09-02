@@ -1,1 +1,39 @@
-<p>user-manage works!</p>
+<button class="btn btn-primary" (click)="save()"> Save All </button>
+<p>groups:</p>
+<!-- <div class="input-group">
+  <span class="input-group-btn">
+    <button class="btn btn-success" (click)="addGroup(tempVariable)">
+      +
+    </button>
+  </span>
+  <input value="{{tempVariable}}" type="text" name="retard" id="retard" (input)="loadUpMyAss($event)" class="form-control">
+</div> -->
+<div *ngFor="let group of userGroups">
+  <h4>{{group.name}}</h4>
+  <ul>
+    <li *ngFor="let channel of group.channels">{{channel.name}}
+      <div class="input-group">
+        <span class="input-group-btn">
+          <button class="btn btn-success" (click)="addUserToChannel(group.name, channel.name, tempVariable)">
+            +
+          </button>
+        </span>
+        <!-- <input value="{{tempVariable}}" type="text" name="retard" id="retard" (input)="loadUpMyAss($event)" class="form-control"> -->
+
+        <div class="form-group">
+          <select class="form-control" name="roleSelect" id="roleSelect" value="{{tempVariable}}"
+            (change)="selectChange($event)">
+            <option *ngFor="let userOption of userOptions" value="{{userOption.value}}">{{userOption.label}}</option>
+          </select>
+        </div>
+      </div>
+      <ul>
+        <li *ngFor="let user of channel.users">
+          {{user}}
+          <button (click)="removeChannelFromGroup(group.name, channel.name, user)" class="btn btn-warning">-</button>
+        </li>
+      </ul>
+
+    </li>
+  </ul>
+</div>

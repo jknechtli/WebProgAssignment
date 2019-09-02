@@ -10,6 +10,7 @@ import { ChatGroupComponent } from './chat-group/chat-group.component';
 import { ChatHubComponent } from './chat-hub/chat-hub.component';
 import { UserCreateComponent } from './user-create/user-create.component';
 import { LogoutComponent } from './logout/logout.component';
+import { UserManageComponent } from './user-manage/user-manage.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'chat/:group', component: ChatGroupComponent },
   { path: 'chat/:group/:channel', component: ChatRoomComponent },
   { path: 'groups', component: GroupsComponent },
+  { path: 'groups/users', component: UserManageComponent },
 ];
 
 @NgModule({
