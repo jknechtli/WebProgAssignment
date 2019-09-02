@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../services/data.service';
+import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-interface IGroup {
+export interface IGroup {
   name: string;
   channels: string[];
 }
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   private url: string = "http://localhost:3000/api";
   // private http: DataService;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private router: Router, private httpClient: HttpClient) {
     this.user = {
       username: "",
       password: ""
@@ -46,10 +46,10 @@ export class LoginComponent implements OnInit {
 
   login() {
 
-    const body = {
-      email: this.user.email,
-      upwd: this.user.password
-    }
+    // const body = {
+    //   email: this.user.email,
+    //   upwd: this.user.password
+    // }
     console.log("Login attempt...");
     this.httpClient.post(this.url + '/auth', this.user, httpOptions)
       .subscribe((data: IUser) => {
@@ -58,6 +58,8 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('userBirthday', data.birthday)
           sessionStorage.setItem('userAge', '' + data.age)
           sessionStorage.setItem('userEmail', data.email)
+
+          this.router.navigateByUrl('/account');
         }
       })
   }
