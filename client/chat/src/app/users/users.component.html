@@ -1,1 +1,30 @@
-<p>users works!</p>
+<div *ngIf="users.length == 0; else elseBlock">
+  No users
+</div>
+
+<ng-template #elseBlock>
+
+  <table>
+    <p>users works!</p>
+    <tr>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Action</th>
+    </tr>
+    <tr *ngFor="let user of users">
+      <td>{{user.username}}</td>
+      <td>{{user.email}}</td>
+      <td>{{getRole(user.role)}}</td>
+      <td><button (click)="editUser(user)" class="btn btn-primary" Ng>Edit</button></td>
+      <!-- <p class="card-text">{{user.groups}}</p> -->
+      <!-- Groups:
+    <ul>
+      <li *ngFor="let group of user.groups">
+        name: {{group.name}}
+      </li>
+    </ul>
+    <p class="card-text">{{user.birthday}}</p> -->
+    </tr>
+  </table>
+</ng-template>
