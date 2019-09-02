@@ -31,25 +31,18 @@ const httpOptions = {
 export class LoginComponent implements OnInit {
   private user: IUser;
   private url: string = "http://localhost:3000/api";
-  // private http: DataService;
 
   constructor(private router: Router, private httpClient: HttpClient) {
     this.user = {
       username: "",
       password: ""
     } as IUser;
-    // this.http= new DataService
   }
 
   ngOnInit() {
   }
 
   login() {
-
-    // const body = {
-    //   email: this.user.email,
-    //   upwd: this.user.password
-    // }
     console.log("Login attempt...");
     this.httpClient.post(this.url + '/auth', this.user, httpOptions)
       .subscribe((data: IUser) => {

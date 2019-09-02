@@ -13,6 +13,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
 import { ChatHubComponent } from './chat-hub/chat-hub.component';
 import { ChatGroupComponent } from './chat-group/chat-group.component';
+import { UserCreateComponent } from './user-create/user-create.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ChatGroupComponent } from './chat-group/chat-group.component';
     ChatRoomComponent,
     ChatHubComponent,
     ChatGroupComponent,
+    UserCreateComponent,
     // DataService
   ],
   imports: [
