@@ -1,10 +1,10 @@
 
 module.exports = (req, res) => {
+  console.log('GetUser')
   const users = require('./../storage/users.json');
 
   const returnUsers = users.map(u => {
     const user = {};
-    // console.log(u.groups)
     user.age = u.age;
     user.username = u.username;
     user.email = u.email;

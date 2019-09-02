@@ -15,6 +15,7 @@ const url: string = "http://localhost:3000/api";
 })
 export class GroupsComponent implements OnInit {
   private groups: IGroup[] = [];
+  private ass = '';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -27,8 +28,60 @@ export class GroupsComponent implements OnInit {
           this.groups = data;
         }
       });
+  }
 
-    // this.groups = 
+  loadUpMyAss(event) {
+    this.ass = event.target.value;
+  }
+
+  addChannelToGroup(group: string, name: string) {
+    if (name === '') {
+      return
+    }
+
+    this.groups = this.groups.map(g => {
+      if (g.name == group) {
+        g.channels.push(name)
+      }
+      return g;
+    })
+    this.ass = ''
+  }
+
+  addGroup(name: string) {
+    if (name === '') {
+      return
+    }
+
+    if (!this.groups.some(g => g.name == name)) {
+      this.groups.push({
+        name,
+        channels: []
+      })
+    }
+    this.ass = ''
+  }
+
+
+  removeChannelFromGroup(group: string, channel: string) {
+    console.log(group, channel)
+    this.groups = this.groups.map(g => {
+      if (g.name == group) {
+        g.channels = g.channels.filter(c => c !== channel);
+      }
+      return g;
+    })
+    this.ass = '';
+  }
+
+  save() {
+    this.httpClient.post<IGroup[]>(url + '/groups', this.groups, httpOptions)
+      .subscribe((data) => {
+        if (data) {
+          console.log("data: ", data);
+          this.groups = data;
+        }
+      });
   }
 
 }

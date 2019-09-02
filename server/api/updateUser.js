@@ -1,6 +1,7 @@
 const fs = require('fs')
 
 module.exports = (req, res) => {
+  console.log('UpdateUser')
   const users = require('./../storage/users.json');
 
   if (!req.body) {
@@ -8,11 +9,6 @@ module.exports = (req, res) => {
   }
 
   const username = req.body.username;
-  // customer.upwd = req.body.upwd;
-  // customer.valid = false;
-
-  // console.log(users);
-
   let found = false;
 
   users.forEach(user => {
@@ -39,7 +35,7 @@ module.exports = (req, res) => {
 
   const jsonString = JSON.stringify(users);
 
-  fs.writeFile('./../storage/user.json', jsonString, err => {
+  fs.writeFile('./storage/users.json', jsonString, err => {
     if (err) {
       console.log('Error writing file: ', err);
     } else {

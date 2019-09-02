@@ -1,5 +1,6 @@
 
 module.exports = (req, res) => {
+  console.log('GetUsers')
   const users = require('./../storage/users.json');
 
 

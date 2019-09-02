@@ -1,4 +1,26 @@
+<button class="btn btn-primary" (click)="save()"> Save All </button>
 <p>groups:</p>
+<div class="input-group">
+  <span class="input-group-btn">
+    <button class="btn btn-success" (click)="addGroup(ass)">
+      Add Group
+    </button>
+  </span>
+  <input value="{{ass}}" type="text" name="retard" id="retard" (input)="loadUpMyAss($event)" class="form-control">
+</div>
 <div *ngFor="let group of groups">
   <h4>{{group.name}}</h4>
+  <div class="input-group">
+    <span class="input-group-btn">
+      <button class="btn btn-success" (click)="addChannelToGroup(group.name, ass)">
+        Add Channel
+      </button>
+    </span>
+    <input value="{{ass}}" type="text" name="retard" id="retard" (input)="loadUpMyAss($event)" class="form-control">
+  </div>
+  <ul>
+    <li *ngFor="let channel of group.channels">{{channel}}
+      <button (click)="removeChannelFromGroup(group.name, channel)" class="btn btn-warning">Remove</button>
+    </li>
+  </ul>
 </div>

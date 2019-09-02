@@ -1,37 +1,8 @@
 
-// const users = [
-//   {
-//     username: 'joel',
-//     birthday: '15/09/1998',
-//     age: '20',
-//     email: 'abc@com.au',
-//     password: '123',
-//     valid: undefined,
-//     role: 15
-//   },
-//   {
-//     username: 'dave',
-//     birthday: '15/09/1987',
-//     age: '31',
-//     email: 'dave@com.au',
-//     password: 'farrow',
-//     valid: undefined,
-//     role: 10
-//   },
-//   {
-//     username: 'nish',
-//     birthday: '15/09/1993',
-//     age: '25',
-//     email: 'nish@com.au',
-//     password: 'ant',
-//     valid: undefined,
-//     role: 5
-//   },
-// ];
-
 const users = require('./../storage/users.json');
 
 module.exports = (req, res) => {
+  console.log('auth')
 
   if (!req.body) {
     return res.sendStatus(400);
@@ -41,8 +12,6 @@ module.exports = (req, res) => {
   customer.email = req.body.email;
   customer.password = req.body.password;
   customer.valid = false;
-
-  // console.log(typeof (users), users);
 
   users.forEach(user => {
     if (req.body.email === user.email && req.body.password === user.password) {

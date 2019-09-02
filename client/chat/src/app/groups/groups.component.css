@@ -1,0 +1,23 @@
+li{
+  margin-bottom:1rem;
+}
+
+.btn-primary {
+  display: block
+}
+
+p,
+h4 {
+  display: inline;
+}
+
+.input-group {
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+  display: inline;
+}
+
+input.form-control {
+  display: inline;
+  width: 70%;
+} 
