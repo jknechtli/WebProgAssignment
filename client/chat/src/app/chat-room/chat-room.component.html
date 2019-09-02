@@ -1,3 +1,13 @@
-<div class="well">
-  chatlogs:
+chatlogs:
+<div class="well well-lg">
+  <p *ngFor="let message of log">{{message}}</p>
+</div>
+<div class="input-group">
+  <input type="text" name="toSendInput" id="toSendInput" class="form-control" value="{{toSend}}"
+    (input)="updateToSend($event)">
+  <span class="input-group-btn">
+    <button class="btn btn-primary" (click)="send()">
+      Send
+    </button>
+  </span>
 </div>
