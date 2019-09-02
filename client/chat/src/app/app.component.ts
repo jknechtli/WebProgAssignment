@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'chat';
+
+  getRole(): number {
+    return +sessionStorage.getItem('userRole') || -1;
+  }
 }

@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('userBirthday', data.birthday)
           sessionStorage.setItem('userAge', '' + data.age)
           sessionStorage.setItem('userEmail', data.email)
+
           sessionStorage.setItem('userRole', '' + data.role)
 
           this.router.navigateByUrl('/account');

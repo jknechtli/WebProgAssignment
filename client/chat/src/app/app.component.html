@@ -3,11 +3,14 @@
   <div class="container-fluid">
     <ul class="nav navbar-nav">
       <li class="active"><a routerLink="/" class="nav-link">Home</a></li>
-      <li><a routerLink="/login" class="nav-link">Login</a></li>
+      <li *ngIf="getRole() <= -1; else elseBlock"><a routerLink="/login" class="nav-link">Login</a></li>
+      <ng-template #elseBlock>
+        <li><a routerLink="/logout" class="nav-link">Logout</a></li>
+      </ng-template>
       <li><a routerLink="/account" class="nav-link">account</a></li>
-      <li><a routerLink="/users" class="nav-link">Users</a></li>
-      <li><a routerLink="/groups" class="nav-link">Groups</a></li>
-      <li><a routerLink="/chat" class="nav-link">Chat</a></li>
+      <li *ngIf="getRole() > 10"><a routerLink="/users" class="nav-link">Users</a></li>
+      <li *ngIf="getRole() > 5"><a routerLink="/groups" class="nav-link">Groups</a></li>
+      <li *ngIf="getRole() > 0"><a routerLink="/chat" class="nav-link">Chat</a></li>
     </ul>
   </div>
 </nav>
