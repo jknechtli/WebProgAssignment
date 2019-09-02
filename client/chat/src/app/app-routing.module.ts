@@ -9,10 +9,12 @@ import { ChatRoomComponent } from './chat-room/chat-room.component';
 import { ChatGroupComponent } from './chat-group/chat-group.component';
 import { ChatHubComponent } from './chat-hub/chat-hub.component';
 import { UserCreateComponent } from './user-create/user-create.component';
+import { LogoutComponent } from './logout/logout.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'logout', component: LogoutComponent },
   { path: 'account', component: AccountComponent },
   { path: 'users', component: UsersComponent },
   { path: 'users/create', component: UserCreateComponent },
