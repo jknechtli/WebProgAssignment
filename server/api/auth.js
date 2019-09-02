@@ -39,13 +39,13 @@ module.exports = (req, res) => {
 
   const customer = {};
   customer.email = req.body.email;
-  customer.upwd = req.body.upwd;
+  customer.password = req.body.password;
   customer.valid = false;
 
   // console.log(typeof (users), users);
 
   users.forEach(user => {
-    if (req.body.email === user.email && req.body.upwd === user.upwd) {
+    if (req.body.email === user.email && req.body.password === user.password) {
       customer.valid = true;
       customer.age = user.age;
       customer.username = user.username;
