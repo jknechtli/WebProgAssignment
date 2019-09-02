@@ -11,7 +11,7 @@ module.exports = (req, res) => {
   // customer.upwd = req.body.upwd;
   // customer.valid = false;
 
-  console.log(users);
+  // console.log(users);
 
   users.forEach(user => {
     if (email === user.email) {
