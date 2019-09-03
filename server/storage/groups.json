@@ -1,1 +1,16 @@
-[{"name":"based","channels":["1chan","2chan","3chan","4chan"]},{"name":"ass","channels":["face"]}]
+[
+  {
+    "name": "based",
+    "channels": [
+      "2chan",
+      "3chan",
+      "4chan"
+    ]
+  },
+  {
+    "name": "dumb",
+    "channels": [
+      "face"
+    ]
+  }
+]
