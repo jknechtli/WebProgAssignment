@@ -34,3 +34,10 @@ Descriptions of API calls are in the files above the function.
 
 The server does not have global variables, when an API is called it will open the file it needs, reads and writes accordingly, then closes and saves the file.
 
+### API:
+
+prot |call| params|return | purpose
+----| ----| ----|----| ---- 
+get | api/groups| |all groups| used to list the groups
+get | api/user| user Id| a specified user| used to get the information of a user
+get | api/users| | all users | used to get list of users

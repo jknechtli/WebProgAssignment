@@ -181,6 +181,6 @@ export class UserManageComponent implements OnInit {
   }
 
   selectChange(event, group, channel) {
-    this.store[group + channel] = event.target.value
+    this.store[group + channel] = event.target.value;
   }
 }
