@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { IUser, IGroup } from '../login/login.component';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -21,6 +21,7 @@ export class UserEditComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private httpClient: HttpClient) {
     this.route.params.subscribe(params => console.log((this.params = params)));
   }
@@ -100,9 +101,26 @@ export class UserEditComponent implements OnInit {
       .subscribe((data) => {
         if (data) {
           console.log("data: ", data);
-          // this.groups = data;
+          this.router.navigateByUrl('/users/' + this.user.username);
+        }
+        else {
+          alert("Error editing the user.")
         }
       });
   }
 
+  delete() {
+    const { username } = this.user;
+
+    this.httpClient.delete(`${url}/user/${username}/delete`, httpOptions)
+      .subscribe((data) => {
+        if (data) {
+          console.log("data: ", data);
+          this.router.navigateByUrl('/users');
+        }
+        else {
+          alert("Error editing the user.")
+        }
+      });
+  }
 }

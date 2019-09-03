@@ -24,4 +24,5 @@ app.post('/api/groups', require(__dirname + '\\api\\updateGroups'))
 app.get('/api/user/:id', require(__dirname + '\\api\\getUser'))
 app.get('/api/users', require(__dirname + '\\api\\getUsers'))
 app.get('/api/groups', require(__dirname + '\\api\\getGroups'))
+app.delete('/api/user/:id/delete', require(__dirname + '\\api\\deleteUser'))
 

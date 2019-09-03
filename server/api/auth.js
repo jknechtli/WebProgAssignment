@@ -1,5 +1,5 @@
-
-const users = require('./../storage/users.json');
+const fs = require('fs')
+// const users = require('./../storage/users.json');
 
 /**
  * This receives an email and password,
@@ -10,26 +10,36 @@ const users = require('./../storage/users.json');
 module.exports = (req, res) => {
   console.log('auth')
 
-  if (!req.body) {
-    return res.sendStatus(400);
-  }
+  fs.readFile('./storage/users.json', (error, userString) => {
 
-  const customer = {};
-  customer.email = req.body.email;
-  customer.password = req.body.password;
-  customer.valid = false;
-
-  users.forEach(user => {
-    if (req.body.email === user.email && req.body.password === user.password) {
-      customer.valid = true;
-      customer.age = user.age;
-      customer.username = user.username;
-      customer.birthday = user.birthday;
-      customer.email = user.email;
-      customer.password = '';
-      customer.role = user.role;
+    if (error) {
+      console.log(JSON.parse(error));
+      return
     }
-  });
 
-  res.send(customer);
+    const users = JSON.parse(userString);
+
+    if (!req.body) {
+      return res.sendStatus(400);
+    }
+
+    const customer = {};
+    customer.email = req.body.email;
+    customer.password = req.body.password;
+    customer.valid = false;
+
+    users.forEach(user => {
+      if (req.body.email === user.email && req.body.password === user.password) {
+        customer.valid = true;
+        customer.age = user.age;
+        customer.username = user.username;
+        customer.birthday = user.birthday;
+        customer.email = user.email;
+        customer.password = '';
+        customer.role = user.role;
+      }
+    });
+
+    res.send(customer);
+  });
 }

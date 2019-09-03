@@ -6,7 +6,6 @@ const fs = require('fs')
  */
 module.exports = (req, res) => {
   console.log('UpdateGroups')
-  const oldGroups = require('./../storage/groups.json');
 
   if (!req.body) {
     return res.sendStatus(400);
@@ -16,10 +15,6 @@ module.exports = (req, res) => {
     name: g.name,
     channels: g.channels,
   }));
-
-  // console.log('was: ', oldGroups)
-  // console.log('now: ', groups)
-
 
   const jsonString = JSON.stringify(groups);
 

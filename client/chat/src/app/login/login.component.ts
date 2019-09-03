@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
 
           sessionStorage.setItem('userRole', '' + data.role)
 
-          this.router.navigateByUrl('/account');
+          this.router.navigateByUrl('/chat');
         }
       })
   }

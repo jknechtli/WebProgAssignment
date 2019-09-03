@@ -80,8 +80,9 @@ export class UserCreateComponent implements OnInit {
   }
 
   save() {
-    console.log(this.user);
-    // return;
+    if (this.user.username == '') {
+      return;
+    }
     this.httpClient.post<IUser>(url + '/user', this.user, httpOptions)
       .subscribe((data) => {
         if (data) {

@@ -1,10 +1,12 @@
 const fs = require('fs')
 /**
- * This receives a list of users that have had their groups altered.
- * The function then updates the groups of all users
- *  */
+ * This receives a username.
+ * The function then filters out any users with that username,
+ * then save to the users
+ */
 module.exports = (req, res) => {
-  console.log('UpdateUser')
+  const userId = req.params.id;
+  console.log('DeleteUser: ', userId)
 
   fs.readFile('./storage/users.json', (error, userString) => {
 
@@ -13,22 +15,13 @@ module.exports = (req, res) => {
       return
     }
 
-    const users = JSON.parse(userString);
+    let users = JSON.parse(userString);
 
     if (!req.body) {
       return res.sendStatus(400);
     }
 
-    const username = req.body.username;
-    let found = false;
-
-    users.forEach(user => {
-      req.body.forEach(({ username, groups }) => {
-        if (username === user.username) {
-          user.groups = groups;
-        }
-      })
-    });
+    users = users.filter(user => userId !== user.username);
 
     const jsonString = JSON.stringify(users);
 
@@ -40,6 +33,6 @@ module.exports = (req, res) => {
       }
     })
 
-    res.send(users)
+    res.send(users);
   });
 }

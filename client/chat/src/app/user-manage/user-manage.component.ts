@@ -30,6 +30,7 @@ export class UserManageComponent implements OnInit {
     value: string;
     label: string;
   }[] = [];
+  private store = {};
 
   constructor(private httpClient: HttpClient) { }
 
@@ -92,8 +93,10 @@ export class UserManageComponent implements OnInit {
     console.log(this.userGroups);
   }
 
-  addUserToChannel(group: string, channel: string, name: string) {
-    console.log()
+  addUserToChannel(group: string, channel: string) {
+
+    const name = this.store[group + channel]
+
     if (name === '') {
       return
     }
@@ -109,25 +112,12 @@ export class UserManageComponent implements OnInit {
       }
       return g;
     })
-    // this.tempVariable = ''
-  }
 
-  addGroup(name: string) {
-    if (name === '') {
-      return
-    }
-
-    if (!this.groups.some(g => g.name == name)) {
-      this.groups.push({
-        name,
-        channels: []
-      })
-    }
-    // this.tempVariable = ''
+    this.store[group + channel] = undefined;
   }
 
   removeChannelFromGroup(group: string, channel: string, user: string) {
-    // console.log(group, channel)
+
     this.userGroups = this.userGroups.map(g => {
       if (g.name == group) {
         g.channels = g.channels.map(c => {
@@ -190,7 +180,7 @@ export class UserManageComponent implements OnInit {
       });
   }
 
-  selectChange(event) {
-    this.tempVariable = event.target.value
+  selectChange(event, group, channel) {
+    this.store[group + channel] = event.target.value
   }
 }

@@ -31,6 +31,7 @@ export class GroupsComponent implements OnInit {
 
   loadUp(event, at: string) {
     this.store[at] = event.target.value;
+    console.log(this.store)
   }
 
   addChannelToGroup(group: string) {

@@ -21,8 +21,8 @@
         <!-- <input value="{{tempVariable}}" type="text" name="retard" id="retard" (input)="loadUpMyAss($event)" class="form-control"> -->
 
         <div class="form-group">
-          <select class="form-control" name="roleSelect" id="roleSelect" value="{{tempVariable}}"
-            (change)="selectChange($event)">
+          <select class="form-control" #userSelect{{group.name}}{{channel.name}} name="userSelect" id="userSelect"
+            value="{{store[group.name+channel.name]}}" (change)="selectChange($event, group.name, channel.name)">
             <option *ngFor="let userOption of userOptions" value="{{userOption.value}}">{{userOption.label}}</option>
           </select>
         </div>
