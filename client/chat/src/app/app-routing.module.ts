@@ -11,6 +11,7 @@ import { ChatHubComponent } from './chat-hub/chat-hub.component';
 import { UserCreateComponent } from './user-create/user-create.component';
 import { LogoutComponent } from './logout/logout.component';
 import { UserManageComponent } from './user-manage/user-manage.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'account', component: AccountComponent },
   { path: 'users', component: UsersComponent },
   { path: 'users/create', component: UserCreateComponent },
+  { path: 'users/:id', component: UserDetailsComponent },
   { path: 'users/:id/edit', component: UserEditComponent },
   { path: 'chat', component: ChatHubComponent },
   { path: 'chat/:group', component: ChatGroupComponent },

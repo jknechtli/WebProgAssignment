@@ -1,0 +1,48 @@
+<div *ngIf="!user || user.username !== params.id; else elseBlock">
+  No user with username: "{{params.id}}"
+</div>
+
+<ng-template #elseBlock>
+  <button routerLink="/users/{{user.username}}/edit" class="btn btn-primary" Ng>Edit</button>
+  <div class="form-group">
+    <label class="label label-default" for="usernameInput">Username:</label>
+    <input value="{{user.username}}" disabled type="text" name="usernameInput" id="usernameInput" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label class="label label-default" for="emailInput">Email:</label>
+    <input value="{{user.email}}" disabled type="text" name="emailInput" id="emailInput" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label class="label label-default" for="birthdayInput">Date of Birth:</label>
+    <input value="{{user.birthday}}" disabled type="text" name="birthdayInput" id="birthdayInput" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label class="label label-default" for="roleSelect">Role:</label>
+    <select class="form-control" name="roleSelect" id="roleSelect" value="{{user.role}}" disabled>
+      <option value="0">Basic User</option>
+      <option value="5">Group Assistant</option>
+      <option value="10">Group Admin</option>
+      <option value="15">Super Admin</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <ul>
+      <li *ngFor="let group of groups">
+        <span>
+          {{group.name}}:
+        </span>
+        <ul>
+          <li *ngFor="let channel of group.channels">
+            {{channel}}
+            <input type="checkbox" name="cbx{{channel}}" id="cbx{{channel}}" [checked]="isInChannel(channel)"
+              disabled />
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</ng-template>
