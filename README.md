@@ -39,5 +39,10 @@ The server does not have global variables, when an API is called it will open th
 prot |call| params|return | purpose
 ----| ----| ----|----| ---- 
 get | api/groups| |all groups| used to list the groups
-get | api/user| user Id| a specified user| used to get the information of a user
+get | api/user/:id| user Id| a specified user| used to get the information of a user
 get | api/users| | all users | used to get list of users
+post | api/user| User Object|  | updates an existing user, or creates a new user
+post | api/groups| list of all groups |  | updates all existing groups to the given groups
+post | api/groups/users| list of all User Objects|  | updates all users groups as per the given list
+post | api/auth| username and password| valid user, or invalid 'username & password' | checks if user can login
+delete | api/user/:id/delete| username |  | deletes user with given id
