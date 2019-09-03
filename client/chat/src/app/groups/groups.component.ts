@@ -15,7 +15,7 @@ const url: string = "http://localhost:3000/api";
 })
 export class GroupsComponent implements OnInit {
   private groups: IGroup[] = [];
-  private ass = '';
+  private store = {};
 
   constructor(private httpClient: HttpClient) { }
 
@@ -24,17 +24,17 @@ export class GroupsComponent implements OnInit {
     this.httpClient.get<IGroup[]>(url + '/groups', httpOptions)
       .subscribe((data) => {
         if (data) {
-          console.log("data: ", data);
           this.groups = data;
         }
       });
   }
 
-  loadUpMyAss(event) {
-    this.ass = event.target.value;
+  loadUp(event, at: string) {
+    this.store[at] = event.target.value;
   }
 
-  addChannelToGroup(group: string, name: string) {
+  addChannelToGroup(group: string) {
+    const name = this.store[group];
     if (name === '') {
       return
     }
@@ -45,10 +45,11 @@ export class GroupsComponent implements OnInit {
       }
       return g;
     })
-    this.ass = ''
+    this.store[group] = ''
   }
 
-  addGroup(name: string) {
+  addGroup() {
+    const name = this.store['all'];
     if (name === '') {
       return
     }
@@ -59,27 +60,27 @@ export class GroupsComponent implements OnInit {
         channels: []
       })
     }
-    this.ass = ''
+    this.store['all'] = ''
   }
 
 
   removeChannelFromGroup(group: string, channel: string) {
-    console.log(group, channel)
     this.groups = this.groups.map(g => {
       if (g.name == group) {
         g.channels = g.channels.filter(c => c !== channel);
       }
       return g;
     })
-    this.ass = '';
   }
 
   save() {
     this.httpClient.post<IGroup[]>(url + '/groups', this.groups, httpOptions)
       .subscribe((data) => {
         if (data) {
-          console.log("data: ", data);
           this.groups = data;
+        }
+        else {
+          alert('Could not save')
         }
       });
   }

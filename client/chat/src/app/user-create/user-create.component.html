@@ -1,24 +1,25 @@
 <div class="form-group">
   <label class="label label-default" for="usernameInput">Username:</label>
-  <input value="{{user.username}}" (input)="user.username = usernameInput.value" type="text" name="usernameInput"
-    id="usernameInput" class="form-control">
+  <input #usernameInput value="{{user.username}}" (input)="user.username = usernameInput.value" type="text"
+    name="usernameInput" id="usernameInput" class="form-control">
 </div>
 
 <div class="form-group">
   <label class="label label-default" for="emailInput">Email:</label>
-  <input value="{{user.email}}" (input)="user.email = emailInput.value" type="text" name="emailInput" id="emailInput"
-    class="form-control">
+  <input value="{{user.email}}" #emailInput (input)="user.email = emailInput.value" type="text" name="emailInput"
+    id="emailInput" class="form-control">
 </div>
 
 <div class="form-group">
   <label class="label label-default" for="birthdayInput">Date of Birth:</label>
   <input value="{{user.birthday}}" (input)="user.birthday = birthdayInput.value" type="text" name="birthdayInput"
-    id="birthdayInput" class="form-control">
+    id="birthdayInput" #birthdayInput class="form-control">
 </div>
 
 <div class="form-group">
   <label class="label label-default" for="roleSelect">Role:</label>
-  <select class="form-control" name="roleSelect" id="roleSelect" value="{{user.role}}" (change)="selectChange($event)">
+  <select class="form-control" name="roleSelect" id="roleSelect" #roleSelect value="{{user.role}}"
+    (change)="selectChange($event)">
     <option value="0">Basic User</option>
     <option value="5">Group Assistant</option>
     <option value="10">Group Admin</option>

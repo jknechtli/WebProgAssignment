@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IUser, IGroup } from '../login/login.component';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 const url: string = "http://localhost:3000/api";
 
@@ -26,7 +27,10 @@ export class UserCreateComponent implements OnInit {
   }
   private groups: IGroup[];
 
-  constructor(private httpClient: HttpClient) {
+  constructor(
+    private router: Router,
+    private httpClient: HttpClient
+  ) {
     this.httpClient.get<IGroup[]>(url + '/groups', httpOptions)
       .subscribe((data) => {
         if (data) {
@@ -76,10 +80,16 @@ export class UserCreateComponent implements OnInit {
   }
 
   save() {
+    console.log(this.user);
+    // return;
     this.httpClient.post<IUser>(url + '/user', this.user, httpOptions)
       .subscribe((data) => {
         if (data) {
           console.log("data: ", data);
+          this.router.navigateByUrl('/users/' + this.user.username);
+        }
+        else {
+          alert("Error creating user.")
         }
       });
   }

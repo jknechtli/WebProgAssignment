@@ -2,21 +2,23 @@
 <p>groups:</p>
 <div class="input-group">
   <span class="input-group-btn">
-    <button class="btn btn-success" (click)="addGroup(ass)">
+    <button class="btn btn-success" (click)="addGroup(store['all'])">
       Add Group
     </button>
   </span>
-  <input value="{{ass}}" type="text" name="retard" id="retard" (input)="loadUpMyAss($event)" class="form-control">
+  <input value="{{store['all']}}" type="text" name="dumbGroupInput" id="dumbGroupInput" (input)="loadUp($event, 'all')"
+    class="form-control">
 </div>
 <div *ngFor="let group of groups">
   <h4>{{group.name}}</h4>
   <div class="input-group">
     <span class="input-group-btn">
-      <button class="btn btn-success" (click)="addChannelToGroup(group.name, ass)">
+      <button class="btn btn-success" (click)="addChannelToGroup(group.name)">
         Add Channel
       </button>
     </span>
-    <input value="{{ass}}" type="text" name="retard" id="retard" (input)="loadUpMyAss($event)" class="form-control">
+    <input value="{{store[group.name]}}" type="text" #input{{group.name}} name="input{{group.name}}"
+      id="input{{group.name}}" (input)="loadUp($event, group.name)" class="form-control">
   </div>
   <ul>
     <li *ngFor="let channel of group.channels">{{channel}}
