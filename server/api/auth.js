@@ -1,6 +1,12 @@
 
 const users = require('./../storage/users.json');
 
+/**
+ * This receives an email and password,
+ * and checks if the email and password match a current user.
+ * If they do, this will return the user with valid == true.
+ * If not, this will return the received data with valid == false.
+ */
 module.exports = (req, res) => {
   console.log('auth')
 

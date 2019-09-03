@@ -1,5 +1,10 @@
 const fs = require('fs')
-
+/**
+ * This receives a user.
+ * The function checks if the user exists.
+ * If it does, it will update the user.
+ * if not, it will add the user.
+ */
 module.exports = (req, res) => {
   console.log('UpdateUser')
   const users = require('./../storage/users.json');
@@ -43,4 +48,5 @@ module.exports = (req, res) => {
     }
   })
 
+  res.send(users);
 }

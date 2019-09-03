@@ -1,6 +1,8 @@
 
+/**
+ * This will return all users that are saved
+ */
 module.exports = (req, res) => {
-  console.log('GetUser')
   const users = require('./../storage/users.json');
 
   const returnUsers = users.map(u => {

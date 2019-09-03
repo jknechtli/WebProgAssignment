@@ -1,5 +1,7 @@
+/**
+ * This returns all groups
+ */
 module.exports = (req, res) => {
-  console.log('GetGroups')
   const groups = require('./../storage/groups.json');
 
   const returnGroups = groups.map(g => {

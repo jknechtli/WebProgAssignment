@@ -1,5 +1,8 @@
 const fs = require('fs')
-
+/**
+ * This receives a list of users that have had their groups altered.
+ * The function then updates the groups of all users
+ *  */
 module.exports = (req, res) => {
   console.log('UpdateUser')
   const users = require('./../storage/users.json');
@@ -29,4 +32,5 @@ module.exports = (req, res) => {
     }
   })
 
+  res.send(users)
 }
