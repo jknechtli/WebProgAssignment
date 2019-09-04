@@ -22,16 +22,26 @@ module.exports = (req, res) => {
       return res.sendStatus(400);
     }
 
-    const username = req.params.id;
+    const username = req.body.username;
+    let found = false;
 
     users.forEach(user => {
       if (username === user.username) {
-        user.age = req.body.age;
-        user.email = req.body.email;
-        user.birthday = req.body.birthday;
-        user.groups = req.body.groups;
+        found = true;
       }
     });
+
+    if (!found) {
+      users.push(
+        {
+          username: req.body.username,
+          email: req.body.email,
+          role: req.body.role,
+          groups: req.body.groups,
+          birthday: req.body.birthday,
+        }
+      )
+    }
 
     const jsonString = JSON.stringify(users);
 

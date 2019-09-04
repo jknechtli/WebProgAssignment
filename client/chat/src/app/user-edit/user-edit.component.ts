@@ -97,7 +97,7 @@ export class UserEditComponent implements OnInit {
     // console.log(difference / (60 * 60 * 24 * 365));
 
     // this.user.age = difference.
-    this.httpClient.post<IUser>(url + '/user', this.user, httpOptions)
+    this.httpClient.put<IUser>(url + `/user/${this.user.username}`, this.user, httpOptions)
       .subscribe((data) => {
         if (data) {
           console.log("data: ", data);
