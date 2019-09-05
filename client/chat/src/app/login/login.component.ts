@@ -1,22 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-export interface IGroup {
-  name: string;
-  channels: string[];
-}
-
-export interface IUser {
-  username: string;
-  birthday: string;
-  age: number;
-  email: string;
-  password: string;
-  valid: boolean;
-  role: 0 | 5 | 10 | 15; // basic|groupAssis|groupAdmin|superAdmin
-  groups: IGroup[];
-}
+import { IUser } from 'src/interfaces/user';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

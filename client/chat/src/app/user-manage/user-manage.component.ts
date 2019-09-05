@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IGroup, IUser } from '../login/login.component';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { IGroup, IUser } from 'src/interfaces/user';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IUser } from '../login/login.component';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { IUser } from 'src/interfaces/user';
 
 const url: string = "http://localhost:3000/api";
 
