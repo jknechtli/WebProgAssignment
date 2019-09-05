@@ -3,6 +3,11 @@
   <input #usernameInput value="{{user.username}}" (input)="user.username = usernameInput.value" type="text"
     name="usernameInput" id="usernameInput" class="form-control">
 </div>
+<div class="form-group">
+  <label class="label label-default" for="passwordInput">Password:</label>
+  <input #passwordInput value="{{user.password}}" (input)="user.password = passwordInput.value" type="password"
+    name="passwordInput" id="passwordInput" class="form-control">
+</div>
 
 <div class="form-group">
   <label class="label label-default" for="emailInput">Email:</label>
