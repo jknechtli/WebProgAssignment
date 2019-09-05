@@ -52,7 +52,8 @@
     <button class="btn btn-primary" (click)="save()">
       Save
     </button>
-    <button class="btn btn-danger" (click)="delete()">
+
+    <button *ngIf="role > 11" class="btn btn-danger" (click)="delete()">
       delete
     </button>
   </div>

@@ -18,6 +18,7 @@ export class UserEditComponent implements OnInit {
   private params;
   private user: IUser;
   private groups: IGroup[];
+  private role = -1;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,6 +28,8 @@ export class UserEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.role = +sessionStorage.getItem('userRole');
+
     this.httpClient.get<IUser>(url + `/user/${this.params.id}`, httpOptions)
       .subscribe((data) => {
         if (data) {
