@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+// import Sockets from 'socket.io';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +18,7 @@ import { UserCreateComponent } from './user-create/user-create.component';
 import { LogoutComponent } from './logout/logout.component';
 import { UserManageComponent } from './user-manage/user-manage.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { SocketService } from './services/socket.service';
 
 @NgModule({
   declarations: [
@@ -39,8 +41,9 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule
+    // , Sockets
   ],
-  providers: [],
+  providers: [SocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

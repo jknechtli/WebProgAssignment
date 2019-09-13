@@ -11,20 +11,36 @@ module.exports = (req, res) => {
       console.log(JSON.parse(error));
       return
     }
+    fs.readFile('./storage/groups.json', (gError, groupString) => {
 
-    const users = JSON.parse(userString);
+      if (gError) {
+        console.log(JSON.parse(gError));
+        return
+      }
 
-    const returnUsers = users.map(u => {
-      const user = {};
-      user.age = u.age;
-      user.username = u.username;
-      user.email = u.email;
-      user.birthday = u.birthday;
-      user.groups = u.groups;
-      user.role = u.role;
-      return user;
-    });
+      const users = JSON.parse(userString);
+      const groups = JSON.parse(groupString);
 
-    res.send(returnUsers);
+      const returnUsers = users.map(u => {
+
+        const userGroups = groups.filter(g => g.users.some(user => user == u.name))
+
+        const user = {};
+        user.age = u.age;
+        user.username = u.username;
+        user.email = u.email;
+        user.birthday = u.birthday;
+        user.role = u.role;
+
+        user.groups = userGroups.map(g => {
+          g.channels = g.channels.filter(c => c.users.some(cu => cu == u.username))
+          return g;
+        })
+
+        return user;
+      });
+
+      res.send(returnUsers);
+    })
   });
 }

@@ -10,6 +10,7 @@ module.exports = (req, res) => {
   if (!req.body) {
     return res.sendStatus(400);
   }
+  return res.sendStatus(400);
 
   const groups = req.body.map(g => ({
     name: g.name,

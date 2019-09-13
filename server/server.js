@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const http = require('http').Server(app)
 const CORS = require('cors');
+const io = require('socket.io')(http);
 
 const bodyParser = require('body-parser');
 
@@ -27,3 +28,6 @@ app.get('/api/users', require(__dirname + '\\api\\getUsers'))
 app.get('/api/groups', require(__dirname + '\\api\\getGroups'))
 app.delete('/api/user/:id/delete', require(__dirname + '\\api\\deleteUser'))
 
+require('./socket')(io);
+// const socketService = require('.\\socket.js');
+// socketService(io);

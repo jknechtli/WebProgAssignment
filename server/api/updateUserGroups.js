@@ -12,6 +12,7 @@ module.exports = (req, res) => {
       console.log(JSON.parse(error));
       return
     }
+    return
 
     const users = JSON.parse(userString);
 

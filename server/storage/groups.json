@@ -1,1 +1,68 @@
-[{"name":"based","channels":["2chan","3chan","4chan"]},{"name":"dumb","channels":["face"]},{"name":"dylan","channels":["New Channel"]}]
+[
+  {
+    "name": "based",
+    "channels": [
+      {
+        "name": "2chan",
+        "users": [
+          "testnow",
+          "joel",
+          "dave"
+        ]
+      },
+      {
+        "name": "3chan",
+        "users": [
+          "nish"
+        ]
+      },
+      {
+        "name": "4chan",
+        "users": [
+          "AlexJones",
+          "nish",
+          "dave",
+          "joel"
+        ]
+      }
+    ],
+    "users": [
+      "joel",
+      "dave",
+      "nish",
+      "test",
+      "testnow",
+      "AlexJones"
+    ]
+  },
+  {
+    "name": "dumb",
+    "channels": [
+      {
+        "name": "face",
+        "users": [
+          "test",
+          "testnow"
+        ]
+      }
+    ],
+    "users": [
+      "test",
+      "testnow"
+    ]
+  },
+  {
+    "name": "dylan",
+    "channels": [
+      {
+        "name": "New Channel",
+        "users": [
+          "testnow"
+        ]
+      }
+    ],
+    "users": [
+      "testnow"
+    ]
+  }
+]

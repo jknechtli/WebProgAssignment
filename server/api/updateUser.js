@@ -29,7 +29,6 @@ module.exports = (req, res) => {
         user.age = req.body.age;
         user.email = req.body.email;
         user.birthday = req.body.birthday;
-        user.groups = req.body.groups;
       }
     });
 

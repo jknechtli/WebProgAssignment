@@ -39,6 +39,7 @@ module.exports = (req, res) => {
           role: req.body.role,
           groups: req.body.groups,
           birthday: req.body.birthday,
+          password: req.body.password,
         }
       )
     }
