@@ -9,41 +9,17 @@ module.exports = (db, app) => {
   app.put('/api/user/:id', (req, res) => {
     console.log('UpdateUser')
 
-    fs.readFile('./storage/users.json', (error, userString) => {
 
-      if (error) {
-        console.log(JSON.parse(error));
-        return
-      }
+    if (!req.body) {
+      return res.sendStatus(400)
+    }
 
-      const users = JSON.parse(userString);
+    const username = req.params.id;
 
-
-      if (!req.body) {
-        return res.sendStatus(400);
-      }
-
-      const username = req.params.id;
-
-      users.forEach(user => {
-        if (username === user.username) {
-          user.age = req.body.age;
-          user.email = req.body.email;
-          user.birthday = req.body.birthday;
-        }
-      });
-
-      const jsonString = JSON.stringify(users);
-
-      fs.writeFile('./storage/users.json', jsonString, err => {
-        if (err) {
-          console.log('Error writing file: ', err);
-        } else {
-          console.log('Successfully wrote file');
-        }
-      })
-
-      res.send(users);
-    });
+    const collection = db.collection('users');
+    collection.updateOne({ username }, { $set: { age: req.body.age, email: req.body.email, birthday: req.body.birthday, role: req.body.role } }, () => {
+      //Return a response to the client to let them know the delete was successful
+      res.send({ 'ok': username });
+    })
   });
 }

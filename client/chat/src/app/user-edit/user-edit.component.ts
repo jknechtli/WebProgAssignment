@@ -30,11 +30,11 @@ export class UserEditComponent implements OnInit {
   ngOnInit() {
     this.role = +sessionStorage.getItem('userRole');
 
-    this.httpClient.get<IUser>(url + `/user/${this.params.id}`, httpOptions)
+    this.httpClient.get<IUser[]>(url + `/user/${this.params.id}`, httpOptions)
       .subscribe((data) => {
         if (data) {
           console.log("data: ", data);
-          this.user = data;
+          this.user = data[0];
         }
       });
 

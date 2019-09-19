@@ -6,35 +6,23 @@ const fs = require('fs')
  */
 module.exports = (db, app) => {
   app.delete('/api/user/:id/delete', (req, res) => {
-    const userId = req.params.id;
-    console.log('DeleteUser: ', userId)
+    const username = req.params.id;
+    console.log('DeleteUser: ', username)
 
-    fs.readFile('./storage/users.json', (error, userString) => {
+    if (!req.body) {
+      return res.sendStatus(400);
+    }
 
-      if (error) {
-        console.log(JSON.parse(error));
-        return
-      }
+    const collection = db.collection('users');
+    //Delete a single item based on its unique ID.
+    collection.deleteOne({ username }, (err, docs) => {
+      //get a new listing of all items in the database and return to client.
+      //  collection.find({}).toArray((err,data)=>{
+      //console.log('data' + data);
+      //   res.send(data);
+      // });
+      res.send({ ok: 1 });
+    })
 
-      let users = JSON.parse(userString);
-
-      if (!req.body) {
-        return res.sendStatus(400);
-      }
-
-      users = users.filter(user => userId !== user.username);
-
-      const jsonString = JSON.stringify(users);
-
-      fs.writeFile('./storage/users.json', jsonString, err => {
-        if (err) {
-          console.log('Error writing file: ', err);
-        } else {
-          console.log('Successfully wrote file');
-        }
-      })
-
-      res.send(users);
-    });
   });
 }

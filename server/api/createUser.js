@@ -1,82 +1,46 @@
-const fs = require('fs')
 
-const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://localhost:27017';
-const dbName = 'mydb';
-const colName = 'product';
-const client = new MongoClient(url);
-const funOrders = require('./dbFunc/funOrders');
-
+const cors = require('cors')
 /**
  * This receives a user.
  * The function checks if the user exists.
  * If it does, it will update the user.
  * if not, it will add the user.
  */
-module.exports = (db, app) => {
-  app.post('/api/user', (req, res) => {
-    console.log('UpdateUser')
+module.exports = (db, corsOptions, app) => {
+  app.post('/api/user', cors(corsOptions), (req, res) => {
+    console.log('CreateUser')
 
-    fs.readFile('./storage/users.json', (error, userString) => {
+    if (!req.body) {
+      return res.sendStatus(400);
+    }
 
-      // client.connect((err) => {
-      //   if (!err) {
-      //     console.log("Connected successfully to server");
-      //     const db = client.db(dbName);
-      //     // console.log(db);
-      //     const collection = db.collection(colName);
-      //     funOrders(client, collection);
-      //     // console.log(collection.find({ id: '1' }));
-      //     client.close();
-      //   }
-      // })
+    const username = req.body.username;
 
+    const collection = db.collection('users');
+    //check for duplicate id's
+    collection.find({ 'username': username }).count((err, count) => {
+      if (count == 0) { //if no duplicate
 
-      if (error) {
-        console.log(JSON.parse(error));
-        return
-      }
-
-      const users = JSON.parse(userString);
-
-
-      if (!req.body) {
-        return res.sendStatus(400);
-      }
-
-      const username = req.body.username;
-      let found = false;
-
-      users.forEach(user => {
-        if (username === user.username) {
-          found = true;
+        const user = {
+          username: req.body.username,
+          email: req.body.email,
+          role: req.body.role,
+          groups: req.body.groups,
+          birthday: req.body.birthday,
+          password: req.body.password,
         }
-      });
 
-      if (!found) {
-        users.push(
-          {
-            username: req.body.username,
-            email: req.body.email,
-            role: req.body.role,
-            groups: req.body.groups,
-            birthday: req.body.birthday,
-            password: req.body.password,
-          }
-        )
+        collection.insertOne(user, (err, dbres) => {
+
+          if (err) throw err;
+          let num = dbres.insertedCount;
+          //send back to client number of items inserted and no error message
+          res.send({ 'num': num, err: null });
+        })
+      } else {
+        //On Error send back error message
+        res.send({ 'num': 0, 'err': "duplicate item" });
       }
-
-      const jsonString = JSON.stringify(users);
-
-      fs.writeFile('./storage/users.json', jsonString, err => {
-        if (err) {
-          console.log('Error writing file: ', err);
-        } else {
-          console.log('Successfully wrote file');
-        }
-      })
-
-      res.send(users);
     });
   });
 }

@@ -6,6 +6,7 @@ import { IUser } from 'src/interfaces/user';
 const url: string = "http://localhost:3000/api";
 
 const httpOptions = {
+  'Access-Control-Allow-Origin': '*',
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 

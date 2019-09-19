@@ -13,10 +13,18 @@ const funOrders = require('./dbFunc/funOrders');
 
 const bodyParser = require('body-parser');
 
+const corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
 app.use(bodyParser.json());
 
 app.use(CORS());
 
+// app.allo
+
+// app.use(express.static('http://localhost:4200'));
 app.use(express.static(__dirname + '/www'));
 
 client.connect((err) => {
@@ -28,7 +36,7 @@ client.connect((err) => {
   const db = client.db(dbName);
   // console.log(db);
   const collection = db.collection(colName);
-  funOrders(client, collection);
+  // funOrders(client, collection);
   // console.log(collection.find({ id: '1' }));
 
   const server = http.listen(3000, () => {
@@ -38,12 +46,12 @@ client.connect((err) => {
   })
 
   require(__dirname + '\\api\\auth')(db, app);
-  require(__dirname + '\\api\\createUser')(db, app);
+  require(__dirname + '\\api\\createUser')(db, corsOptions, app);
   require(__dirname + '\\api\\updateUserGroups')(db, app);
   require(__dirname + '\\api\\updateGroups')(db, app);
   require(__dirname + '\\api\\updateUser')(db, app);
   require(__dirname + '\\api\\getUser')(db, app);
-  require(__dirname + '\\api\\getUsers')(db, app);
+  require(__dirname + '\\api\\getUsers')(db, corsOptions, app);
   require(__dirname + '\\api\\getGroups')(db, app);
   require(__dirname + '\\api\\deleteUser')(db, app);
 
