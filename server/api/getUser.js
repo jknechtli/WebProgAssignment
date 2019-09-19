@@ -3,45 +3,47 @@ const fs = require('fs')
  * This will receive a username,
  * and then return a user that matches that username
  */
-module.exports = (req, res) => {
+module.exports = (db, app) => {
+  app.get('/api/user/:id', (req, res) => {
 
-  fs.readFile('./storage/users.json', (error, userString) => {
+    fs.readFile('./storage/users.json', (error, userString) => {
 
-    if (error) {
-      console.log(JSON.parse(error));
-      return
-    }
-
-    fs.readFile('./storage/groups.json', (gError, groupString) => {
-
-      if (gError) {
-        console.log(JSON.parse(gError));
+      if (error) {
+        console.log(JSON.parse(error));
         return
       }
 
-      const users = JSON.parse(userString);
-      const groups = JSON.parse(groupString);
+      fs.readFile('./storage/groups.json', (gError, groupString) => {
 
-      const userId = req.params.id;
-      const userGroups = groups.filter(g => g.users.some(user => user == userId))
+        if (gError) {
+          console.log(JSON.parse(gError));
+          return
+        }
 
+        const users = JSON.parse(userString);
+        const groups = JSON.parse(groupString);
 
-      const returnUser = users
-        .filter(u => u.username == userId)
-        .map(u => {
-          const user = {};
-          user.age = u.age;
-          user.username = u.username;
-          user.email = u.email;
-          user.birthday = u.birthday;
-          user.groups = u.groups;
-          user.role = u.role;
-          return user;
-        })
-      [0];
+        const userId = req.params.id;
+        const userGroups = groups.filter(g => g.users.some(user => user == userId))
 
 
-      res.send(returnUser);
-    })
+        const returnUser = users
+          .filter(u => u.username == userId)
+          .map(u => {
+            const user = {};
+            user.age = u.age;
+            user.username = u.username;
+            user.email = u.email;
+            user.birthday = u.birthday;
+            user.groups = u.groups;
+            user.role = u.role;
+            return user;
+          })
+        [0];
+
+
+        res.send(returnUser);
+      })
+    });
   });
 }

@@ -2,45 +2,47 @@ const fs = require('fs')
 /**
  * This will return all users that are saved
  */
-module.exports = (req, res) => {
-  // const users = require('./../storage/users.json');
+module.exports = (db, app) => {
+  app.get('/api/users', (req, res) => {
+    // const users = require('./../storage/users.json');
 
-  fs.readFile('./storage/users.json', (error, userString) => {
+    fs.readFile('./storage/users.json', (error, userString) => {
 
-    if (error) {
-      console.log(JSON.parse(error));
-      return
-    }
-    fs.readFile('./storage/groups.json', (gError, groupString) => {
-
-      if (gError) {
-        console.log(JSON.parse(gError));
+      if (error) {
+        console.log(JSON.parse(error));
         return
       }
+      fs.readFile('./storage/groups.json', (gError, groupString) => {
 
-      const users = JSON.parse(userString);
-      const groups = JSON.parse(groupString);
+        if (gError) {
+          console.log(JSON.parse(gError));
+          return
+        }
 
-      const returnUsers = users.map(u => {
+        const users = JSON.parse(userString);
+        const groups = JSON.parse(groupString);
 
-        const userGroups = groups.filter(g => g.users.some(user => user == u.name))
+        const returnUsers = users.map(u => {
 
-        const user = {};
-        user.age = u.age;
-        user.username = u.username;
-        user.email = u.email;
-        user.birthday = u.birthday;
-        user.role = u.role;
+          const userGroups = groups.filter(g => g.users.some(user => user == u.name))
 
-        user.groups = userGroups.map(g => {
-          g.channels = g.channels.filter(c => c.users.some(cu => cu == u.username))
-          return g;
-        })
+          const user = {};
+          user.age = u.age;
+          user.username = u.username;
+          user.email = u.email;
+          user.birthday = u.birthday;
+          user.role = u.role;
 
-        return user;
-      });
+          user.groups = userGroups.map(g => {
+            g.channels = g.channels.filter(c => c.users.some(cu => cu == u.username))
+            return g;
+          })
 
-      res.send(returnUsers);
-    })
+          return user;
+        });
+
+        res.send(returnUsers);
+      })
+    });
   });
 }
