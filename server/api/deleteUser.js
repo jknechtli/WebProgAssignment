@@ -15,6 +15,7 @@ module.exports = (db, app) => {
 
     const collection = db.collection('users');
     //Delete a single item based on its unique ID.
+
     collection.deleteOne({ username }, (err, docs) => {
       //get a new listing of all items in the database and return to client.
       //  collection.find({}).toArray((err,data)=>{

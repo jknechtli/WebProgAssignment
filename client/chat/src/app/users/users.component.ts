@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IUser } from 'src/interfaces/user';
 
-const url: string = "http://localhost:3000/api";
+const url: string = "http://localhost:3001/api";
 
 const httpOptions = {
   'Access-Control-Allow-Origin': '*',
@@ -25,7 +25,10 @@ export class UsersComponent implements OnInit {
       .subscribe((data) => {
         if (data) {
           console.log("data: ", data);
-          this.users = data;
+          this.users = data.map(user => {
+            user.role = +user.role as any;
+            return user
+          });
         }
       });
   }

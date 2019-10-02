@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { IGroup, IUser } from 'src/interfaces/user';
+import { INewGroup, IUser } from 'src/interfaces/user';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-const url: string = "http://localhost:3000/api";
+const url: string = "http://localhost:3001/api";
 
 interface IUserGroup {
   name: string;
@@ -22,9 +22,9 @@ interface IUserGroup {
   styleUrls: ['./user-manage.component.css']
 })
 export class UserManageComponent implements OnInit {
-  private groups: IGroup[] = [];
+  private groups: INewGroup[] = [];
   private users: IUser[] = [];
-  private userGroups: IUserGroup[] = [];
+  // private userGroups: IUserGroup[] = [];
   private tempVariable = '';
   private userOptions: {
     value: string;
@@ -35,14 +35,14 @@ export class UserManageComponent implements OnInit {
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
-    this.httpClient.get<IGroup[]>(url + '/groups', httpOptions)
+    this.httpClient.get<INewGroup[]>(url + '/groups', httpOptions)
       .subscribe((data) => {
         if (data) {
           console.log("Groups: ", data);
           this.groups = data;
 
           if (this.users.length > 0) {
-            this.combineUserAndGroups();
+            // this.combineUserAndGroups();
           }
         }
       });
@@ -54,44 +54,45 @@ export class UserManageComponent implements OnInit {
           this.users = data;
 
           if (this.groups.length > 0) {
-            this.combineUserAndGroups();
+            this.users.forEach(user => {
+              this.userOptions.push({ value: user.username, label: user.username });
+            });
           }
         }
       });
   }
 
-  combineUserAndGroups() {
+  // combineUserAndGroups() {
+  //   this.users.forEach(user => {
+  //     this.userOptions.push({ value: user.username, label: user.username });
+  //   });
+  //   this.groups.forEach(group => {
 
-    this.users.forEach(user => {
-      this.userOptions.push({ value: user.username, label: user.username });
-    });
-    this.groups.forEach(group => {
+  //     const userGroup: IUserGroup = {
+  //       name: group.name,
+  //       channels: []
+  //     }
 
-      const userGroup: IUserGroup = {
-        name: group.name,
-        channels: []
-      }
+  //     group.channels.forEach(channel => {
+  //       const userChannel = {
+  //         name: channel,
+  //         users: []
+  //       }
 
-      group.channels.forEach(channel => {
-        const userChannel = {
-          name: channel,
-          users: []
-        }
+  //       this.users.forEach(user => {
+  //         const isInChannel = user.groups && user.groups.find(UG => UG.name === group.name && UG.channels.some(UGC => UGC == channel))
+  //         if (isInChannel) {
+  //           userChannel.users.push(user.username)
+  //         }
+  //       });
 
-        this.users.forEach(user => {
-          const isInChannel = user.groups && user.groups.find(UG => UG.name === group.name && UG.channels.some(UGC => UGC == channel))
-          if (isInChannel) {
-            userChannel.users.push(user.username)
-          }
-        });
+  //       userGroup.channels.push(userChannel);
+  //     });
 
-        userGroup.channels.push(userChannel);
-      });
-
-      this.userGroups.push(userGroup);
-    })
-    console.log(this.userGroups);
-  }
+  //     this.userGroups.push(userGroup);
+  //   })
+  //   console.log(this.userGroups);
+  // }
 
   addUserToChannel(group: string, channel: string) {
 
@@ -101,7 +102,7 @@ export class UserManageComponent implements OnInit {
       return
     }
 
-    this.userGroups = this.userGroups.map(g => {
+    this.groups = this.groups.map(g => {
       if (g.name == group) {
         g.channels = g.channels.map(c => {
           if (c.name === channel) {
@@ -118,7 +119,7 @@ export class UserManageComponent implements OnInit {
 
   removeChannelFromGroup(group: string, channel: string, user: string) {
 
-    this.userGroups = this.userGroups.map(g => {
+    this.groups = this.groups.map(g => {
       if (g.name == group) {
         g.channels = g.channels.map(c => {
           if (c.name === channel) {
@@ -138,7 +139,7 @@ export class UserManageComponent implements OnInit {
       return u;
     })
 
-    this.userGroups.forEach(group => {
+    this.groups.forEach(group => {
       const groupName = group.name;
 
       group.channels.forEach(channel => {
@@ -171,7 +172,7 @@ export class UserManageComponent implements OnInit {
 
     console.log(this.users);
 
-    this.httpClient.post<IGroup[]>(url + '/groups/users', this.users, httpOptions)
+    this.httpClient.post<INewGroup[]>(url + '/groups/users', this.users, httpOptions)
       .subscribe((data) => {
         if (data) {
           console.log("data: ", data);

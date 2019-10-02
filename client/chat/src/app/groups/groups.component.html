@@ -21,7 +21,7 @@
       id="input{{group.name}}" (input)="loadUp($event, group.name)" class="form-control">
   </div>
   <ul>
-    <li *ngFor="let channel of group.channels">{{channel}}
+    <li *ngFor="let channel of group.channels">{{channel.name}}
       <button (click)="removeChannelFromGroup(group.name, channel)" class="btn btn-warning">Remove</button>
     </li>
   </ul>

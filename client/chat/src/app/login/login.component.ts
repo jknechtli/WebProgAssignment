@@ -15,7 +15,7 @@ const httpOptions = {
 })
 export class LoginComponent implements OnInit {
   private user: IUser;
-  private url: string = "http://localhost:3000/api";
+  private url: string = "http://localhost:3001/api";
 
   constructor(private router: Router, private httpClient: HttpClient) {
     this.user = {
@@ -40,6 +40,9 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('userRole', '' + data.role)
 
           this.router.navigateByUrl('/chat');
+        }
+        else {
+          alert("Invalid login details");
         }
       })
   }

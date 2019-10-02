@@ -37,7 +37,7 @@
         </span>
         <ul>
           <li *ngFor="let channel of group.channels">
-            {{channel}}
+            {{channel.name}}
             <input type="checkbox" name="cbx{{channel}}" id="cbx{{channel}}" [checked]="isInChannel(channel)"
               disabled />
           </li>

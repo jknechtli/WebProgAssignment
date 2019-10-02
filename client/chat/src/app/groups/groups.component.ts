@@ -6,7 +6,7 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-const url: string = "http://localhost:3000/api";
+const url: string = "http://localhost:3001/api";
 
 @Component({
   selector: 'app-groups',
@@ -75,15 +75,17 @@ export class GroupsComponent implements OnInit {
   }
 
   save() {
-    this.httpClient.post<IGroup[]>(url + '/groups', this.groups, httpOptions)
-      .subscribe((data) => {
-        if (data) {
-          this.groups = data;
-        }
-        else {
-          alert('Could not save')
-        }
-      });
+    this.groups.forEach(group => {
+      this.httpClient.post<IGroup[]>(url + '/group', group, httpOptions)
+        .subscribe((data) => {
+          if (data) {
+            this.groups = data;
+          }
+          else {
+            alert('Could not save')
+          }
+        });
+    })
   }
 
 }

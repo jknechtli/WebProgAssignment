@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IUser, IGroup } from 'src/interfaces/user';
 
-const url: string = "http://localhost:3000/api";
+const url: string = "http://localhost:3001/api";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -30,11 +30,11 @@ export class UserEditComponent implements OnInit {
   ngOnInit() {
     this.role = +sessionStorage.getItem('userRole');
 
-    this.httpClient.get<IUser[]>(url + `/user/${this.params.id}`, httpOptions)
+    this.httpClient.get<IUser>(url + `/user/${this.params.id}`, httpOptions)
       .subscribe((data) => {
         if (data) {
           console.log("data: ", data);
-          this.user = data[0];
+          this.user = data;
         }
       });
 

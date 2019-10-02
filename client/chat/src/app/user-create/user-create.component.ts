@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { IUser, IGroup } from 'src/interfaces/user';
 
-const url: string = "http://localhost:3000/api";
+const url: string = "http://localhost:3001/api";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

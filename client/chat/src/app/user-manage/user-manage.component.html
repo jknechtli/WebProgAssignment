@@ -8,7 +8,7 @@
   </span>
   <input value="{{tempVariable}}" type="text" name="retard" id="retard" (input)="loadUpMyAss($event)" class="form-control">
 </div> -->
-<div *ngFor="let group of userGroups">
+<div *ngFor="let group of groups">
   <h4>{{group.name}}</h4>
   <ul>
     <li *ngFor="let channel of group.channels">{{channel.name}}

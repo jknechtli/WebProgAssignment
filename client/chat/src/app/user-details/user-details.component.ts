@@ -3,7 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IGroup, IUser } from 'src/interfaces/user';
 
-const url: string = "http://localhost:3000/api";
+const url: string = "http://localhost:3001/api";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -26,15 +26,15 @@ export class UserDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.httpClient.get<IUser[]>(url + `/user/${this.params.id}`, httpOptions)
+    this.httpClient.get<IUser>(url + `/user/${this.params.id}`, httpOptions)
       .subscribe((data) => {
         if (data) {
           console.log("data: ", data);
-          this.user = data[0];
+          this.user = data;
         }
       });
 
-    this.httpClient.get<IGroup[]>(url + '/groups', httpOptions)
+    this.httpClient.get<IGroup[]>(url + `/user/${this.params.id}/groups`, httpOptions)
       .subscribe((data) => {
         if (data) {
           console.log("data: ", data);
