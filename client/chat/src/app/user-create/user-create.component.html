@@ -40,9 +40,9 @@
       </span>
       <ul>
         <li *ngFor="let channel of group.channels">
-          {{channel}}
-          <input type="checkbox" name="cbx{{channel}}" id="cbx{{channel}}" [checked]="isInChannel(channel)"
-            (change)="groupChange(group.name, channel)" />
+          {{channel.name}}
+          <input type="checkbox" name="cbx{{channel.name}}" id="cbx{{channel.name}}"
+            [checked]="isInChannel(channel.name)" (change)="groupChange(group.name, channel.name)" />
         </li>
       </ul>
     </li>

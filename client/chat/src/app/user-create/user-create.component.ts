@@ -83,6 +83,9 @@ export class UserCreateComponent implements OnInit {
     if (this.user.username == '') {
       return;
     }
+
+    this.user.username = this.user.username.replace(' ', '');
+
     this.httpClient.post<IUser>(url + '/user', this.user, httpOptions)
       .subscribe((data) => {
         if (data) {
