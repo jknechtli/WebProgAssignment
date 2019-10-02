@@ -24,8 +24,6 @@ interface IUserGroup {
 export class UserManageComponent implements OnInit {
   private groups: INewGroup[] = [];
   private users: IUser[] = [];
-  // private userGroups: IUserGroup[] = [];
-  private tempVariable = '';
   private userOptions: {
     value: string;
     label: string;
@@ -40,10 +38,6 @@ export class UserManageComponent implements OnInit {
         if (data) {
           console.log("Groups: ", data);
           this.groups = data;
-
-          if (this.users.length > 0) {
-            // this.combineUserAndGroups();
-          }
         }
       });
 
@@ -53,46 +47,12 @@ export class UserManageComponent implements OnInit {
           console.log("users: ", data);
           this.users = data;
 
-          if (this.groups.length > 0) {
-            this.users.forEach(user => {
-              this.userOptions.push({ value: user.username, label: user.username });
-            });
-          }
+          this.users.forEach(user => {
+            this.userOptions.push({ value: user.username, label: user.username });
+          });
         }
       });
   }
-
-  // combineUserAndGroups() {
-  //   this.users.forEach(user => {
-  //     this.userOptions.push({ value: user.username, label: user.username });
-  //   });
-  //   this.groups.forEach(group => {
-
-  //     const userGroup: IUserGroup = {
-  //       name: group.name,
-  //       channels: []
-  //     }
-
-  //     group.channels.forEach(channel => {
-  //       const userChannel = {
-  //         name: channel,
-  //         users: []
-  //       }
-
-  //       this.users.forEach(user => {
-  //         const isInChannel = user.groups && user.groups.find(UG => UG.name === group.name && UG.channels.some(UGC => UGC == channel))
-  //         if (isInChannel) {
-  //           userChannel.users.push(user.username)
-  //         }
-  //       });
-
-  //       userGroup.channels.push(userChannel);
-  //     });
-
-  //     this.userGroups.push(userGroup);
-  //   })
-  //   console.log(this.userGroups);
-  // }
 
   addUserToChannel(group: string, channel: string) {
 
@@ -139,44 +99,15 @@ export class UserManageComponent implements OnInit {
       return u;
     })
 
-    this.groups.forEach(group => {
-      const groupName = group.name;
-
-      group.channels.forEach(channel => {
-        const channelName = channel.name;
-
-        channel.users.forEach(user => {
-          this.users = this.users.map(u => {
-            if (user === u.username) {
-
-              if (!u.groups.some(g => g.name === groupName)) {
-                u.groups.push({
-                  name: groupName,
-                  channels: [channelName]
-                })
-              }
-              else {
-                u.groups = u.groups.map(g => {
-                  if (g.name == groupName) {
-                    g.channels.push(channelName);
-                  }
-                  return g;
-                })
-              }
-            }
-            return u;
-          })
-        });
-      });
-    });
-
-    console.log(this.users);
-
-    this.httpClient.post<INewGroup[]>(url + '/groups/users', this.users, httpOptions)
+    console.log(this.groups);
+    // return
+    this.httpClient.post<INewGroup[]>(url + '/groups/users', this.groups, httpOptions)
       .subscribe((data) => {
         if (data) {
-          console.log("data: ", data);
-          this.groups = data;
+          // TODO: add something here
+        }
+        else {
+          alert("Failed to update");
         }
       });
   }
