@@ -7,7 +7,7 @@
     <span style="display:block">Channels: </span>
     <ul>
       <li *ngFor="let channel of group.channels">
-        <a routerLink="/chat/{{group.name}}/{{channel}}" class="nav-link">{{channel}}</a>
+        <a routerLink="/chat/{{group.name}}/{{channel.name}}" class="nav-link">{{channel.name}}</a>
       </li>
     </ul>
   </li>

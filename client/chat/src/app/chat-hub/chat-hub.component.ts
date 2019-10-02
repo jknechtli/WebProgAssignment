@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { IUser, IGroup } from 'src/interfaces/user';
+import { IUser, IGroup, INewGroup } from 'src/interfaces/user';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-const url: string = "http://localhost:3000/api";
+const url: string = "http://localhost:3001/api";
 
 @Component({
   selector: 'app-chat-hub',
@@ -14,7 +14,7 @@ const url: string = "http://localhost:3000/api";
   styleUrls: ['./chat-hub.component.css']
 })
 export class ChatHubComponent implements OnInit {
-  private groups: IGroup[];
+  private groups: INewGroup[];
 
   constructor(private httpClient: HttpClient) { }
 
@@ -22,11 +22,11 @@ export class ChatHubComponent implements OnInit {
     const username = sessionStorage.getItem('username');
     const role = sessionStorage.getItem('userRole');
 
-    this.httpClient.get<IUser>(url + `/user/${username}`, httpOptions)
+    this.httpClient.get<INewGroup[]>(url + `/user/${username}/groups`, httpOptions)
       .subscribe((data) => {
         if (data) {
           console.log("data: ", data);
-          this.groups = data.groups;
+          this.groups = data;
         }
       });
   }
