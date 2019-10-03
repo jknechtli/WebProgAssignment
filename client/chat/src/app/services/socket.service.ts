@@ -35,16 +35,6 @@ export class SocketService {
     this.socket.disconnect();
   }
 
-  // onMessage(): Observable<any> {
-  //   const observable = new Observable(observer => {
-  //     this.socket.on('chat-message', (msg) => {
-  //       console.log('on message: ', msg);
-  //       observer.next(msg);
-  //     });
-  //   });
-  //   return observable;
-  // }
-
   sendMessage(message, next?) {
     console.log('message sent')
     this.socket.emit('chat-message', message);

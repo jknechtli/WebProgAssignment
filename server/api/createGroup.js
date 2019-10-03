@@ -15,8 +15,7 @@ module.exports = (db, corsOptions, app) => {
     }
 
     const group = req.body;
-    console.log("\n\nGroup:", group)
-    console.log("\n\n")
+    console.log("Group:", group)
 
     const collection = db.collection('groups');
     //check for duplicate id's

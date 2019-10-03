@@ -17,7 +17,7 @@
       <th>Action</th>
     </tr>
     <tr *ngFor="let user of users">
-      <td>{{user.username}}</td>
+      <td> <a routerLink="/users/{{user.username}}"></a> {{user.username}}</td>
       <td>{{user.email}}</td>
       <td>{{getRole(user.role)}}</td>
       <td><button (click)="editUser(user)" class="btn btn-primary" Ng>Edit</button></td>

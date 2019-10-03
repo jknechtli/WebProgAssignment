@@ -41,7 +41,7 @@ export class UsersComponent implements OnInit {
 
   getRole(role: number) {
     switch (role) {
-      case 0: return "Basic User";
+      case 1: return "Basic User";
       case 5: return "Group Assistant";
       case 10: return "Group Admin";
       case 15: return "Super Admin";

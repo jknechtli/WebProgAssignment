@@ -25,7 +25,6 @@ module.exports = (db, app) => {
         const user = users[0];
         user.valid = true;
         res.send(user);
-
       }
     });
 

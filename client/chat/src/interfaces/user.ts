@@ -11,7 +11,7 @@ export interface IUser {
   email: string;
   password: string;
   valid: boolean;
-  role: 0 | 5 | 10 | 15; // basic | groupAssis | groupAdmin | superAdmin
+  role: 1 | 5 | 10 | 15; // basic | groupAssis | groupAdmin | superAdmin
   groups: IGroup[];
 }
 
