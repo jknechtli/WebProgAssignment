@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ChatRoomComponent } from './chat-room.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('ChatRoomComponent', () => {
   let component: ChatRoomComponent;
@@ -8,9 +10,13 @@ describe('ChatRoomComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChatRoomComponent ]
+      imports: [
+        RouterTestingModule,
+        HttpClientModule
+      ],
+      declarations: [ChatRoomComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
