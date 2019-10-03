@@ -46,7 +46,7 @@ client.connect((err) => {
   require(__dirname + '\\api\\auth')(db, app);
   require(__dirname + '\\api\\createUser')(db, corsOptions, app);
   require(__dirname + '\\api\\createGroup')(db, corsOptions, app);
-  // require(__dirname + '\\api\\updateUserGroups')(db, app);
+  require(__dirname + '\\api\\updateUserGroups')(db, app);
   require(__dirname + '\\api\\updateGroups')(db, app);
   require(__dirname + '\\api\\updateUser')(db, app);
   require(__dirname + '\\api\\getChat')(db, app);

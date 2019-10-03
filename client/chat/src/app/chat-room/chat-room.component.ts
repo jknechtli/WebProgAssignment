@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SocketService } from '../services/socket.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 // import io from 'socket.io-client';
 
@@ -31,13 +31,19 @@ export class ChatRoomComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private httpClient: HttpClient,
     private socketService: SocketService) {
+
     this.route.params.subscribe(params => console.log((this.params = params)));
   }
 
   ngOnInit() {
     // get logs
+
+    if (!this.username) {
+      this.router.navigateByUrl('/login');
+    }
 
     const room = `${this.params.group}-${this.params.channel}`
 
