@@ -27,11 +27,21 @@ Run `nodemon server.js`. The server will be on `http://localhost:3000/`.
 Enter the client folder `cd client`
 Run `ng serve -o` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
+# Testing:
+
+## Client:
+
+Run `ng test`
+
+## Server:
+
+Run `npm test`
+
 # Documentation: 
 
 ## Git:
 
-I only use my git repo to keep track of backups and the version. I have not had to branch out or roll back my version.
+I use my git repo to keep track of backups and the version. I added a new branch to migrate my api to mongoDB, and will merge it back later.
 
 ## Server:
 
@@ -41,7 +51,7 @@ The server does not have global variables, when an API is called it will open th
 
 ### API:
 
-prot |call| params|return | purpose
+protocol |call| params|return | purpose
 ----| ----| ----|----| ---- 
 get | api/groups| |all groups| used to list the groups
 get | api/user/:id| user Id| a specified user| used to get the information of a user
@@ -51,3 +61,43 @@ post | api/groups| list of all groups |  | updates all existing groups to the gi
 post | api/groups/users| list of all User Objects|  | updates all users groups as per the given list
 post | api/auth| username and password| valid user, or invalid 'username & password' | checks if user can login
 delete | api/user/:id/delete| username |  | deletes user with given id
+
+### Data Structure:
+
+#### Users:
+
+A user contains the following properties:
+
+name| type
+----| ----
+username| string
+birthday| string
+age| number
+email| string
+password| string
+valid| boolean
+role| 0 \| 5 \| 10 \| 15 (basic \| groupAssistant \| groupAdmin \| superAdmin)
+
+#### Groups:
+
+A channel contains the following properties:
+
+name| type
+----| ----
+name | string
+users | string[]
+
+"users" are the usernames of the users within the channel.
+
+A group contains the following properties:
+
+name| type
+----| ----
+name | string
+channels | Channel[]
+
+## Client:
+
+### Angular:
+
+
