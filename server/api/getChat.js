@@ -1,11 +1,9 @@
-// const cors = require('cors')
 /**
  * This will return all users that are saved
  */
 module.exports = (db, app) => {
   app.get('/api/chat/:group/:channel', (req, res) => {
     console.log('getChat')
-    // const users = require('./../storage/users.json');
 
     const chatName = `${req.params.group}-${req.params.channel}`
 

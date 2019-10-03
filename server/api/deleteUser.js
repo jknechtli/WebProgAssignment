@@ -1,4 +1,3 @@
-const fs = require('fs')
 /**
  * This receives a username.
  * The function then filters out any users with that username,
@@ -14,15 +13,16 @@ module.exports = (db, app) => {
     }
 
     const collection = db.collection('users');
-    //Delete a single item based on its unique ID.
 
+    //Delete a single item based on its unique ID.
     collection.deleteOne({ username }, (err, docs) => {
-      //get a new listing of all items in the database and return to client.
-      //  collection.find({}).toArray((err,data)=>{
-      //console.log('data' + data);
-      //   res.send(data);
-      // });
-      res.send({ ok: 1 });
+      if (err) {
+        res.send({ ok: false });
+        throw err
+      }
+      else {
+        res.send({ ok: true });
+      }
     })
 
   });

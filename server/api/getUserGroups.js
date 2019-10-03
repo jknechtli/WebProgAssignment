@@ -3,7 +3,7 @@
 
 module.exports = (db, app) => {
   app.get('/api/user/:id/groups', (req, res) => {
-    console.log('CreateUser')
+    console.log('Get Groups with User: ' + req.params.id);
 
     if (!req.body) {
       return res.sendStatus(400);
@@ -14,10 +14,6 @@ module.exports = (db, app) => {
     const groupCollection = db.collection('groups');
 
     groupCollection.find({}).toArray((err, groups) => {
-
-      console.log("--------------------");
-      console.log("Groups: ", groups);
-
       groups = groups.filter(group =>
         group.channels.some(channel =>
           channel.users.some(user => user === username)
