@@ -1,29 +1,16 @@
-const fs = require('fs')
 /**
  * This returns all groups
  */
 module.exports = (db, app) => {
   app.get('/api/groups', (req, res) => {
-    // const groups = require('./../storage/groups.json');
 
+    console.log('getGroups');
 
-    fs.readFile('./storage/groups.json', (error, groupstring) => {
-
-      if (error) {
-        console.log(JSON.parse(error));
-        return
+    const collection = db.collection('groups');
+    collection.find({}).toArray((err, data) => {
+      if (!err) {
+        res.send(data);
       }
-
-      const groups = JSON.parse(groupstring);
-
-      const returnGroups = groups.map(g => {
-        const group = {};
-        group.name = g.name;
-        group.channels = g.channels;
-        return group;
-      });
-
-      res.send(returnGroups);
     });
   });
 }
