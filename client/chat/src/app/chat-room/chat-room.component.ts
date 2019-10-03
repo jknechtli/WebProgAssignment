@@ -52,31 +52,29 @@ export class ChatRoomComponent implements OnInit {
       this.log.push(msg);
     })
 
+
+    const log: ILog = {
+      message: `${this.username} has connected`,
+      user: ''
+    }
+    this.socketService.sendMessage(log)
+
     this.httpClient.get<ILog[]>(url + `/chat/${this.params.group}/${this.params.channel}`, httpOptions)
       .subscribe((data) => {
         if (data) {
           console.log("data: ", data);
-          this.log = data;
+          this.log = [...data, ...this.log];
         }
       });
-
-    // this.ioConnection = this.socketService.onMessage()
-    //   .subscribe((msg) => {
-    //     this.log.push(msg);
-    //   });
-
-    // this.socket.on('chat-message', (msg) => {
-    //   console.log('hit');
-    // });
   }
 
   public ngOnDestroy() {
-    // this.routeSub.unsubscribe();
-    console.log('hit1');
-    this.socketService.disconnect();
-  }
-  beforeunload() {
-    console.log('hit');
+    const log: ILog = {
+      message: `${this.username} has disconnected`,
+      user: ''
+    }
+    this.socketService.sendMessage(log)
+
     this.socketService.disconnect();
   }
 
