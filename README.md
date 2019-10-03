@@ -29,13 +29,15 @@ Run `ng serve -o` for a dev server. Navigate to `http://localhost:4200/`. The ap
 
 # Testing:
 
-## Client:
+#### Client:
 
 Run `ng test`
 
-## Server:
+#### Server:
 
 Run `npm test`
+
+
 
 # Documentation: 
 
@@ -98,6 +100,11 @@ channels | Channel[]
 
 ## Client:
 
-### Angular:
+### Angular Architecture:
 
+In the root folder of my client I have my `src` folder, which contains my Angular code, and all my config files.
+Within `src` I have `app`, which contains all my Angular components, `interfaces`, which contains all shared interfaces, `services` which keeps all services, and all setup files for angular.
+In `app`, I have separated all component files into their own folder.
+
+All components have a Typescript file as the controller, HTML file as the view, a css file for the stylings, and a `spec.ts` file for testing.
 
