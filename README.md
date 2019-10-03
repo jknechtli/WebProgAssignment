@@ -17,6 +17,11 @@ Run `npm i`
 Enter the server folder `cd server`
 Run `node server.js`. The server will be on `http://localhost:3000/`.
 
+## Running the server as developer
+
+Enter the server folder `cd server`
+Run `nodemon server.js`. The server will be on `http://localhost:3000/`.
+
 ## Running the client
 
 Enter the client folder `cd client`
