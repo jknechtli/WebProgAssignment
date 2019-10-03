@@ -19,7 +19,7 @@ export class UserCreateComponent implements OnInit {
     birthday: 'DD/MM/YYYY',
     username: '',
     email: '',
-    role: 0,
+    role: 1,
     groups: [],
     age: 0,
     password: '',
