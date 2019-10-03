@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { IGroup } from 'src/interfaces/user';
+import { INewGroup } from 'src/interfaces/user';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,14 +14,14 @@ const url: string = "http://localhost:3001/api";
   styleUrls: ['./groups.component.css']
 })
 export class GroupsComponent implements OnInit {
-  private groups: IGroup[] = [];
+  private groups: INewGroup[] = [];
   private store = {};
 
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
 
-    this.httpClient.get<IGroup[]>(url + '/groups', httpOptions)
+    this.httpClient.get<INewGroup[]>(url + '/groups', httpOptions)
       .subscribe((data) => {
         if (data) {
           this.groups = data;
@@ -58,7 +58,8 @@ export class GroupsComponent implements OnInit {
     if (!this.groups.some(g => g.name == name)) {
       this.groups.push({
         name,
-        channels: []
+        channels: [],
+        users: []
       })
     }
     this.store['all'] = ''
@@ -68,24 +69,24 @@ export class GroupsComponent implements OnInit {
   removeChannelFromGroup(group: string, channel: string) {
     this.groups = this.groups.map(g => {
       if (g.name == group) {
-        g.channels = g.channels.filter(c => c !== channel);
+        g.channels = g.channels.filter(c => c.name !== channel);
       }
       return g;
     })
   }
 
   save() {
-    this.groups.forEach(group => {
-      this.httpClient.post<IGroup[]>(url + '/group', group, httpOptions)
-        .subscribe((data) => {
-          if (data) {
-            this.groups = data;
-          }
-          else {
-            alert('Could not save')
-          }
-        });
-    })
+    // this.groups.forEach(group => {
+    //   this.httpClient.post<INewGroup[]>(url + '/group', group, httpOptions)
+    //     .subscribe((data) => {
+    //       if (data) {
+    //         this.groups = data;
+    //       }
+    //       else {
+    //         alert('Could not save')
+    //       }
+    //     });
+    // })
   }
 
 }

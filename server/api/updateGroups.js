@@ -1,5 +1,3 @@
-const fs = require('fs')
-
 /**
  * This will receive a list of groups, 
  * and then update the saved groups
@@ -11,23 +9,33 @@ module.exports = (db, app) => {
     if (!req.body) {
       return res.sendStatus(400);
     }
-    return res.sendStatus(400);
+    return res.sendStatus(404);
 
-    const groups = req.body.map(g => ({
+    const updatedGroups = req.body.map(g => ({
       name: g.name,
       channels: g.channels,
     }));
 
-    const jsonString = JSON.stringify(groups);
+    const collection = db.collection('groups');
+    collection.find({}).toArray((err, groups) => {
 
-    fs.writeFile('./storage/groups.json', jsonString, err => {
-      if (err) {
-        console.log('Error writing file: ', err);
-      } else {
-        console.log('Successfully wrote groups to file');
-      }
-    })
+      const newGroups = updatedGroups.filter(updatedGroup =>
+        !groups.some(group => group.name === updatedGroup.name)
+      );
+      const deletedGroups = groups.filter(group =>
+        !updatedGroups.some(updatedGroup => updatedGroup.name === group.name)
+      ).map(group => group.name);
 
-    res.send(returnUsers);
+      const theRest = updatedGroups.filter(updatedGroup =>
+        !newGroups.some(newGroup => newGroup.name === updatedGroup.name) &&
+        !deletedGroups.some(deletedGroup => deletedGroup.name === updatedGroup.name)
+      );
+
+      collection.remove({ name: { '$in': deletedGroups } });
+      collection.insertMany(newGroups);
+      theRest.forEach(group => {
+        collection.updateOne(group)
+      });
+    });
   });
 }
